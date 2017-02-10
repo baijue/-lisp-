@@ -1,0 +1,19 @@
+；；游程编码（run-length encoding）
+;将一个列表进行压缩
+(defun compress(x)
+  (if (consp x)
+      x
+      (compr (car x) 1 (cdr x))))
+(defun compr(elt n lst);该函数主要是来递归的压缩列表，目前在列表中元素elt的个数为n个，继续检查列表中剩余元素即lst中elt的个数
+  （if (null lst)
+       (list (elt-s elt n))
+       (let ((next (car lst)))
+          (if (eql elt next)
+              (compr elt (+ n 1) (cdr lst))
+              (cons (elt-s elt n) (compr next (cdr lst)))))))
+(defun elt-s(elt n)
+   (if (> n 1)
+        (list n elt)
+        elt))
+       
+      
